@@ -1,0 +1,102 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction History</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f4f8;
+            padding: 30px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            overflow-x: auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #1d4ed8;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+        th {
+            background: #2563eb;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background: #f1f5f9;
+        }
+
+        .back {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 16px;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Previous Predictions</h1>
+
+        {% if predictions %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Area (sq. ft.)</th>
+                    <th>Bedrooms</th>
+                    <th>Bathrooms</th>
+                    <th>Age (years)</th>
+                    <th>Predicted Price (Lakh)</th>
+                    <th>Date & Time</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for item in predictions %}
+                <tr>
+                    <td>{{ item.area }}</td>
+                    <td>{{ item.bedrooms }}</td>
+                    <td>{{ item.bathrooms }}</td>
+                    <td>{{ item.age }}</td>
+                    <td>₹ {{ item.predicted_price }}</td>
+                    <td>{{ item.created_at|date:"d M Y, h:i A" }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+            <p style="text-align: center;">
+                No previous predictions found. Please predict a house price first.
+            </p>
+        {% endif %}
+
+        <a href="/" class="back">Back to Prediction</a>
+    </div>
+</body>
+</html>
