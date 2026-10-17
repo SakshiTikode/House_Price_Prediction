@@ -38,8 +38,9 @@ def home(request):
                 predicted_price=prediction
             )
 
-        except (ValueError, TypeError):
-            error = "Please enter valid house details."
+        except Exception as e:
+          print("PREDICTION ERROR:", repr(e))
+          raise
 
     return render(
         request,
